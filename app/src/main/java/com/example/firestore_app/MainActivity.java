@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 //        note.put(KEY_TITLE,title);
 //        note.put(KEY_DESCRIPTION,description);
 
-        Note note=new Note(title,description,1);
+        Note note=new Note(title,description,1,null,null);
 
 
       noteRef.set(note)

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="Title"
         android:inputType="text"
-        android:id="@+id/Edit_text_title_second"
+        android:id="@+id/Edit_text_title_pagination"
 
         />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:hint="Priority"
         android:inputType="number"
-        android:id="@+id/Edit_text_priority_second"
+        android:id="@+id/Edit_text_priority_pagination"
 
         />
 
@@ -32,7 +32,25 @@
         android:layout_height="wrap_content"
         android:hint="Description"
         android:inputType="text"
-        android:id="@+id/Edit_text_description_second"
+        android:id="@+id/Edit_text_description_pagination"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tags"
+        android:inputType="text"
+        android:id="@+id/Edit_text_description_pagination_tags"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tags"
+        android:inputType="text"
+        android:id="@+id/Edit_text_description_pagination_tags_map"
 
         />
 
@@ -52,14 +70,7 @@
         android:onClick="LoadNote"
         />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Go to pagination"
-        android:id="@+id/retrieve_button_gotopagination"
-        android:onClick="GotoPagination"
 
-        />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -69,7 +80,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/data_retrieved_second"
+        android:id="@+id/data_retrieved_pagination"
 
         />
 

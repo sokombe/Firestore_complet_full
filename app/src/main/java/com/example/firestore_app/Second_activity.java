@@ -1,26 +1,21 @@
 package com.example.firestore_app;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -39,6 +34,8 @@ public class Second_activity extends AppCompatActivity {
     EditText editText_priority;
 
     TextView textView_data_retrieved_second;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +89,13 @@ public class Second_activity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+
+
     public void AddNote(View v) {
 
         String title = editText_title.getText().toString();
@@ -103,7 +107,7 @@ public class Second_activity extends AppCompatActivity {
 
         int priority = Integer.parseInt(editText_priority.getText().toString());
 
-        Note note = new Note(title, description, priority);
+        Note note = new Note(title, description, priority,null,null);
 
 
         //noteBookRef.document("customkey").set(note);
@@ -165,7 +169,7 @@ public class Second_activity extends AppCompatActivity {
 //                whereGreaterThanOrEqualTo("priority",2)
 //                .orderBy("priority")
 //                .orderBy("title")
-////                .whereEqualTo("title","Aa")// we can combine multiple query
+    ////                .whereEqualTo("title","Aa")// we can combine multiple query
 //
 //                .limit(3)
 ////                .whereEqualTo("priority",2)// Optional just data with priority 2
@@ -201,4 +205,10 @@ public class Second_activity extends AppCompatActivity {
 //                });
 
     }
-}
+
+    public void GotoPagination(View v) {
+        Intent intent = new Intent(this, Pagination_and_others.class);
+        startActivity(intent);
+    }
+
+    }

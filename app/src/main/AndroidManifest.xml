@@ -16,6 +16,9 @@
         android:theme="@style/Theme.FireStore_App"
         tools:targetApi="31">
         <activity
+            android:name=".Pagination_and_others"
+            android:exported="false" />
+        <activity
             android:name=".Second_activity"
             android:exported="false" />
         <activity
