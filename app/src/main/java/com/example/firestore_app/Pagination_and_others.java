@@ -65,9 +65,12 @@ public class Pagination_and_others extends AppCompatActivity {
 
 //        executeBatchWrite();
 
-        updateArray();
+//        updateMap();
+
+        readSubcollectionInAdocument();
 
     }
+
 
 
 
@@ -148,7 +151,13 @@ public class Pagination_and_others extends AppCompatActivity {
 
         //noteBookRef.document("customkey").set(note);
 
-        noteBookRef.add(note);
+
+        // to create a subcollection in a document
+        noteBookRef.document("me7EoxLqUlAolfS6vw1X")
+                        .collection("Child Note")
+                .add(note);
+
+//        noteBookRef.add(note);
 
         //onsuccsess.......................
 
@@ -209,10 +218,55 @@ public class Pagination_and_others extends AppCompatActivity {
         });
     }
 
+    public   void readSubcollectionInAdocument(){
+        noteBookRef
+                .document("me7EoxLqUlAolfS6vw1X")
+                .collection("Child Note")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        String data = "";
+
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+                            Note note = documentSnapshot.toObject(Note.class);
+                            note.setDocumentId(documentSnapshot.getId());
+
+                            String documentId = note.getDocumentId();
+
+                            data +="ID: "+ note.getDocumentId() + "\n";
+
+                            //for array
+//                            for (String tag : note.getTags()) {
+//                                data += "\n- " + tag + "\n";
+//                            }
+//
+//                            data +="\n\n";
+
+                            // for map
+
+                            for (String tag : note.getMaptags().keySet()) {
+                                data += "\n- " + tag + "\n";
+                            }
+
+                        }
+
+                        textView_data_retrieved_second.setText(data);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
 
     public   void LoadNote(View v){
         noteBookRef
-                .whereEqualTo("maptags.tags", true)// the dot introduce nested fields in map field
+                .whereEqualTo("maptags.tags favoris", true)// the dot introduce nested fields in map field
 //                .whereArrayContains("tags", "cv")// for spcific tags in array
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -243,12 +297,6 @@ public class Pagination_and_others extends AppCompatActivity {
                                 data += "\n- " + tag + "\n";
                             }
 
-
-
-//                            data +="Title: "+ note.getTitle() + "\n";
-//                            data +="Descr: "+ note.getDescription() + "\n";
-//                            data +="Priority: "+ note.getPriority() + "\n";
-//                            data +="DocumentId: "+ note.getDocumentId() + "\n\n";
 }
 
                         textView_data_retrieved_second.setText(data);
@@ -265,6 +313,13 @@ public class Pagination_and_others extends AppCompatActivity {
     private  void  updateArray(){
 //        noteBookRef.document("4WiaaIS4nxVspxKiPq4z").update("tags", FieldValue.arrayUnion("new tag")); to add a new tag to the array
         noteBookRef.document("4WiaaIS4nxVspxKiPq4z").update("tags", FieldValue.arrayRemove("new tag"));// to remove a tag from the array
+
+    }
+
+
+    private  void  updateMap(){
+//        noteBookRef.document("me7EoxLqUlAolfS6vw1X").update("maptags.tags favoris",false);// update map value
+        noteBookRef.document("me7EoxLqUlAolfS6vw1X").update("maptags.tags favoris",FieldValue.delete() );// update map value
 
     }
 
